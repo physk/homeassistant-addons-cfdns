@@ -2,7 +2,7 @@
 include: https://raw.githubusercontent.com/hassio-addons/organization/master/gitlabci/addon.yml
 
 variables:
-  ADDON_GITHUB_REPO: "physk/hassio-addons-cf-ddns"
+  ADDON_GITHUB_REPO: "physk/homeassistant-addons-cfdns"
   ADDON_SLUG: "addon-cloudflare-ddns"
   ADDON_TARGET: "addon-cloudflare-ddns"
 

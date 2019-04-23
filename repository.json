@@ -1,5 +1,5 @@
 {
   "name": "Cloudflare DDNS Hass.io Add-On",
-  "url": "https://github.com/physk/hassio-addons-cf-ddns",
+  "url": "https://github.com/physk/homeassistant-addons-cfdns",
   "maintainer": "PhysK"
 }

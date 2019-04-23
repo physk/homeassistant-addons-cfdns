@@ -39,7 +39,7 @@ LABEL \
     org.label-schema.name="CloudFlare DDNS" \
     org.label-schema.schema-version="1.0" \
     org.label-schema.url="https://addons.community" \
-    org.label-schema.usage="https://github.com/physk/hassio-addons-cf-ddns/blob/master/README.md" \
+    org.label-schema.usage="https://github.com/physk/homeassistant-addons-cfdns/blob/master/README.md" \
     org.label-schema.vcs-ref=${BUILD_REF} \
-    org.label-schema.vcs-url="https://github.com/physk/hassio-addons-cf-ddns/" \
+    org.label-schema.vcs-url="https://github.com/physk/homeassistant-addons-cfdns/" \
     org.label-schema.vendor="Community Hass.io Addons"
