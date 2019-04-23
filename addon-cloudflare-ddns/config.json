@@ -1,0 +1,34 @@
+{
+    "name": "Cloudflare DDNS",
+    "version": "1.0.0",
+    "slug": "cf-ddns",
+    "description": "Cloudflare DDNS by Community Hass.io Add-ons",
+    "url": "https://github.com/physk/hassio-addons-cf-ddns",
+    "startup": "application",
+    "arch": [
+        "aarch64",
+        "amd64",
+        "armhf",
+        "i386"
+    ],
+    "boot": "auto",
+    "hassio_api": true,
+    "hassio_role": "default",
+    "map": [
+        "config:rw"
+    ],
+    "options": {
+        "email": "",
+        "api_key": "",
+        "domain": "",
+        "subdomain": "*",
+        "log_level": "info"
+    },
+    "schema": {
+        "email": "str",
+        "api_key": "str",
+        "domain": "str",
+        "subdomain": "str",
+        "log_level": "match(^(trace|debug|info|notice|warning|error|fatal)$)"
+    }
+  }

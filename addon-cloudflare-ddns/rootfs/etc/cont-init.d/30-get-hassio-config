@@ -1,0 +1,39 @@
+#!/usr/bin/with-contenv bash
+# shellcheck disable=SC1091
+
+source /usr/lib/hassio-addons/base.sh
+
+if hass.config.has_value 'email'; then
+  EMAIL=$(hass.config.get 'email')
+else
+  echo "----------------------------------------------------------------"
+  echo " -> You have not entered an email in your config <-"
+  echo "----------------------------------------------------------------"
+  exit 1
+fi
+if hass.config.has_value 'api_key'; then
+  API_KEY=$(hass.config.get 'api_key')
+else
+  echo "----------------------------------------------------------------"
+  echo " -> You have not entered an api_key in your config <-"
+  echo "----------------------------------------------------------------"
+  exit 1
+fi
+if hass.config.has_value 'domain'; then
+  DOMAIN=$(hass.config.get 'domain')
+else
+  echo "----------------------------------------------------------------"
+  echo " -> You have not entered an domain in your config <-"
+  echo "----------------------------------------------------------------"
+  exit 1
+fi
+if hass.config.has_value 'subdomain'; then
+  SUBDOMAIN=$(hass.config.get 'subdomain')
+else
+  echo "----------------------------------------------------------------"
+  echo " -> You have not entered an subdomain in your config <- "
+  echo "----------------------------------------------------------------"
+  exit 1
+fi
+
+echo "EMAIL=\"$EMAIL\" API_KEY=\"$API_KEY\" ZONE=\"$DOMAIN\" SUBDOMAIN=\"$SUBDOMAIN\"" > /config/cloudflare.conf
