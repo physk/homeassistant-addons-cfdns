@@ -1,38 +1,55 @@
-#!/usr/bin/with-contenv bash
-# shellcheck disable=SC1091
+#!/usr/bin/with-contenv bashio
 
-source /usr/lib/hassio-addons/base.sh
-
-if hass.config.has_value 'email'; then
-  EMAIL=$(hass.config.get 'email')
+if bashio::config.has_value 'email'; then
+  EMAIL=$(bashio::config 'email')
 else
-  echo "----------------------------------------------------------------"
-  echo " -> You have not entered an email in your config <-"
-  echo "----------------------------------------------------------------"
+  bashio::log.fatal
+  bashio::log.fatal 'It seems like you have configured the "email"'
+  bashio::log.fatal 'option, unfortunately, the path specified could'
+  bashio::log.fatal 'not be found.'
+  bashio::log.fatal
+  bashio::log.fatal 'Please double check the add-on configuration.'
+  bashio::log.fatal
+  bashio::exit.nok
   exit 1
 fi
-if hass.config.has_value 'api_key'; then
-  API_KEY=$(hass.config.get 'api_key')
+if bashio::config.has_value 'api_key'; then
+  API_KEY=$(bashio::config 'api_key')
 else
-  echo "----------------------------------------------------------------"
-  echo " -> You have not entered an api_key in your config <-"
-  echo "----------------------------------------------------------------"
+  bashio::log.fatal
+  bashio::log.fatal 'It seems like you have configured the "api_key"'
+  bashio::log.fatal 'option, unfortunately, the path specified could'
+  bashio::log.fatal 'not be found.'
+  bashio::log.fatal
+  bashio::log.fatal 'Please double check the add-on configuration.'
+  bashio::log.fatal
+  bashio::exit.nok
   exit 1
 fi
-if hass.config.has_value 'domain'; then
-  DOMAIN=$(hass.config.get 'domain')
+if bashio::config.has_value 'domain'; then
+  DOMAIN=$(bashio::config 'domain')
 else
-  echo "----------------------------------------------------------------"
-  echo " -> You have not entered an domain in your config <-"
-  echo "----------------------------------------------------------------"
+  bashio::log.fatal
+  bashio::log.fatal 'It seems like you have configured the "domain"'
+  bashio::log.fatal 'option, unfortunately, the path specified could'
+  bashio::log.fatal 'not be found.'
+  bashio::log.fatal
+  bashio::log.fatal 'Please double check the add-on configuration.'
+  bashio::log.fatal
+  bashio::exit.nok
   exit 1
 fi
-if hass.config.has_value 'subdomain'; then
-  SUBDOMAIN=$(hass.config.get 'subdomain')
+if bashio::config.has_value 'subdomain'; then
+  SUBDOMAIN=$(bashio::config 'subdomain')
 else
-  echo "----------------------------------------------------------------"
-  echo " -> You have not entered an subdomain in your config <- "
-  echo "----------------------------------------------------------------"
+  bashio::log.fatal
+  bashio::log.fatal 'It seems like you have configured the "sumdomain"'
+  bashio::log.fatal 'option, unfortunately, the path specified could'
+  bashio::log.fatal 'not be found.'
+  bashio::log.fatal
+  bashio::log.fatal 'Please double check the add-on configuration.'
+  bashio::log.fatal
+  bashio::exit.nok
   exit 1
 fi
 
