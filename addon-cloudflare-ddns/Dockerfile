@@ -10,7 +10,7 @@ RUN apk add --no-cache \
     wget@edge=1.20.3-r0 \
     jq@edge=1.6-r0 \
     bind-tools@edge=9.12.3_p4-r2 \
-    curl@edge=7.64.1-r1  && \
+    curl=7.64.0-r1  && \
     \
     chmod +x /etc/cont-init.d/* && \
     \
