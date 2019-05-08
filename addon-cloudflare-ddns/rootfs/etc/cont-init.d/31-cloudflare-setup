@@ -1,20 +1,21 @@
-#!/usr/bin/with-contenv sh
+#!/usr/bin/with-contenv bashio
 
 . /app/cloudflare.sh
-. /config/cloudflare.conf
+. /data/cloudflare.conf
 
 # # Verify the $EMAIL and $API_KEY env variables are valid
  statusCode=$(verifyToken)
 
 if [ "$statusCode" != "200" ]; then
-  echo "----------------------------------------------------------------"
-  echo "ERROR: Invalid CloudFlare Credentials - $statusCode"
-  echo "----------------------------------------------------------------"
-  echo "Make sure the EMAIL and API_KEY variables are correct. You can"
-  echo "get your CloudFlare API Key here:"
-  echo
-  echo "https://www.cloudflare.com/a/profile"
-  echo "----------------------------------------------------------------"
+  bashio::log.fatal "----------------------------------------------------------------"
+  bashio::log.fatal "ERROR: Invalid CloudFlare Credentials - $statusCode"
+  bashio::log.fatal "----------------------------------------------------------------"
+  bashio::log.fatal "Make sure the EMAIL and API_KEY variables are correct. You can"
+  bashio::log.fatal "get your CloudFlare API Key here:"
+  bashio::log.fatal
+  bashio::log.fatal "https://www.cloudflare.com/a/profile"
+  bashio::log.fatal "----------------------------------------------------------------"
+  bashio::exit.nok
   exit 1
 fi
 
@@ -22,14 +23,15 @@ fi
 CFZoneId=$(getZoneId)
 
 if [ "$CFZoneId" == "null" ]; then
-  echo "----------------------------------------------------------------"
-  echo "ERROR: Zone for $ZONE was not found in your CloudFlare Account"
-  echo "----------------------------------------------------------------"
-  echo "Make sure the ZONE variable is correct and the domain exists"
-  echo "in your CloudFlare account. You can add a new domain here:"
-  echo
-  echo "https://www.cloudflare.com/a/add-site"
-  echo "----------------------------------------------------------------"
+  bashio::log.fatal "----------------------------------------------------------------"
+  bashio::log.fatal "ERROR: Zone for $ZONE was not found in your CloudFlare Account"
+  bashio::log.fatal "----------------------------------------------------------------"
+  bashio::log.fatal "Make sure the ZONE variable is correct and the domain exists"
+  bashio::log.fatal "in your CloudFlare account. You can add a new domain here:"
+  bashio::log.fatal
+  bashio::log.fatal "https://www.cloudflare.com/a/add-site"
+  bashio::log.fatal "----------------------------------------------------------------"
+  bashio::exit.nok
   exit 1
 fi
 
@@ -39,19 +41,20 @@ echo "DNS Zone: $ZONE ($CFZoneId)"
 PublicIpAddress=$(getPublicIpAddress)
 
 if [ "$PublicIpAddress" == "" ]; then
-  echo "----------------------------------------------------------------"
+  bashio::log.fatal "----------------------------------------------------------------"
   if [ "$RRTYPE" == "AAAA" ]; then
-    echo "ERROR: Failed To Get Public IPv6 Address"
-    echo "----------------------------------------------------------------"
-    echo "You must be running Docker with IPv6 support enabled or this"
-    echo "container with host networking enabled."
-    echo
-    echo "Add '--net=host' to your docker run command or if using"
-    echo "docker-compose add 'network_mode: host' to this service."
+    bashio::log.fatal "ERROR: Failed To Get Public IPv6 Address"
+    bashio::log.fatal "----------------------------------------------------------------"
+    bashio::log.fatal "You must be running Docker with IPv6 support enabled or this"
+    bashio::log.fatal "container with host networking enabled."
+    bashio::log.fatal
+    bashio::log.fatal "Add '--net=host' to your docker run command or if using"
+    bashio::log.fatal "docker-compose add 'network_mode: host' to this service."
   else
-    echo "ERROR: Failed To Get Public IPv4 Address"
+    bashio::log.fatal "ERROR: Failed To Get Public IPv4 Address"
   fi
-  echo "----------------------------------------------------------------"
+  bashio::log.fatal "----------------------------------------------------------------"
+  bashio::exit.nok
   exit 1
 fi
 
@@ -65,14 +68,14 @@ if [ "$CFDnsRecordId" == "null" ]; then
   CFDnsRecordId=$(createDnsRecord $CFZoneId $CFDnsRecordName $PublicIpAddress)
 
   if [ "$CFDnsRecordId" == "null" ]; then
-    echo "----------------------------------------------------------------"
-    echo "ERROR: Failed to create DNS record '$CFDnsRecordName'"
-    echo "----------------------------------------------------------------"
+    bashio::log.fatal "----------------------------------------------------------------"
+    bashio::log.fatal "ERROR: Failed to create DNS record '$CFDnsRecordName'"
+    bashio::log.fatal "----------------------------------------------------------------"
+    bashio::exit.nok
     exit 1
   fi
 
 fi
 
 echo "DNS Record: $CFDnsRecordName ($CFDnsRecordId)"
-echo "CF_ZONE_ID=\"$CFZoneId\" CF_RECORD_ID=\"$CFDnsRecordId\" CF_RECORD_NAME=\"$CFDnsRecordName\"" >> /config/cloudflare.conf
-echo "*/5	*	*	*	*	/etc/cont-init.d/50-ddns" >> /var/spool/cron/crontabs/root
+echo "CF_ZONE_ID=\"$CFZoneId\" CF_RECORD_ID=\"$CFDnsRecordId\" CF_RECORD_NAME=\"$CFDnsRecordName\"" >> /data/cloudflare.conf

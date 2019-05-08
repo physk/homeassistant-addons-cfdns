@@ -6,18 +6,20 @@ FROM ${BUILD_FROM}
 COPY rootfs /
 
 # Setup base
-RUN apk add --no-cache \
+RUN echo http://dl-2.alpinelinux.org/alpine/edge/community/ >> /etc/apk/repositories && \
+    apk update && \
+    apk add --no-cache \
     wget@edge=1.20.3-r0 \
     jq@edge=1.6-r0 \
-    bind-tools@edge=9.12.3_p4-r2 \
+    bind-tools@edge=9.14.1-r1 \
     curl=7.64.0-r1  && \
     \
     chmod +x /etc/cont-init.d/* && \
     \
     mkdir -p /config
 
-# Scrip to run after startup
-CMD ["/init"]
+# Script to run after startup
+CMD ["/app/run-cfdns.sh"]
 
 # Build arguments
 ARG BUILD_ARCH

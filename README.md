@@ -1,4 +1,4 @@
-# Community Hass.io Add-ons: Example
+# Community Hass.io Add-ons: CF DNS Updater
 
 [![GitHub Release][releases-shield]][releases]
 ![Project Stage][project-stage-shield]
@@ -15,24 +15,11 @@
 
 [![Support my work on Patreon][patreon-shield]][patreon]
 
-Example add-on by Community Hass.io add-ons.
+CF DNS Updater add-on by Community Hass.io add-ons.
 
 ## About
 
-This is an example add-on for Hass.io. When started, it displays a
-random quote every 5 seconds.
-
-It shows off several features and structures like:
-
-- Full blown GitHub repository.
-- General Dockerfile structure and setup.
-- The use of the `config.json` and `build.json` files.
-- General shell scripting structure (`run.sh`).
-- Quality assurance using CodeClimate.
-- Continuous integration and deployment using CircleCI.
-- Usage of the Community Hass.io Add-ons build environment.
-- Small use of the Bash function library in our base images.
-- The use of Docker label schema.
+This addon will keep your CloudFlare domains up to date when your IP changes
 
 ## Installation
 
@@ -40,9 +27,10 @@ The installation of this add-on is pretty straightforward and not different in
 comparison to installing any other Hass.io add-on.
 
 1. [Add our Hass.io add-ons repository][repository] to your Hass.io instance.
-1. Install the "Example" add-on
-1. Start the "Example" add-on
-1. Check the logs of the "Example" add-on to see it in action.
+1. Install the "CF DNS Updater" add-on
+1. Configure the addon
+1. Start the "CF DNS Updater" add-on
+1. Check the logs of the "CF DNS Updater" add-on to see it in action.
 
 **NOTE**: Do not add this repository to Hass.io, please use:
 `https://github.com/hassio-addons/repository`.
@@ -60,17 +48,19 @@ comparison to installing any other Hass.io add-on.
 
 ## Configuration
 
-Eventought this add-on is just an example add-on, it does come with some
-configuration options to play around with.
+This add-on has a few configuration options that need to be set for it to work
 
 **Note**: _Remember to restart the add-on when the configuration is changed._
 
-Example add-on configuration:
+CF DNS Updater add-on configuration:
 
 ```json
 {
-  "log_level": "info",
-  "seconds_between_quotes": 5
+  "email": "",
+  "api_key": "",
+  "domain": "",
+  "subdomain": "*",
+  "log_level": "info"
 }
 ```
 
@@ -92,11 +82,24 @@ more severe level, e.g., `debug` also shows `info` messages. By default,
 the `log_level` is set to `info`, which is the recommended setting unless
 you are troubleshooting.
 
-### Option: `seconds_between_quotes`
+### Option: `email`
 
-Sets the number of seconds between the output of each quote. The value
-must be between `1` and `120` seconds. This value is set to `5` seconds by
-default.
+You're Cloudflare email
+
+### Option: `api_key`
+
+You're Cloudflare API Key you can get that from [here](https://www.cloudflare.com/a/profile)
+
+### Option `domain`
+
+This is the domain zone that you would like to keep up to date. E.g. example.com
+
+### Option `subdomain`
+
+This is the subdomain that you would like to keep up to date
+E.g.
+  `*` Would update the *.example.com A record
+  `*.home` Would update the *.home.example.com
 
 ## Changelog & Releases
 
@@ -139,7 +142,7 @@ Thank you for being involved! :heart_eyes:
 
 ## Authors & contributors
 
-The original setup of this repository is by [Franck Nijhof][frenck].
+The original setup of this repository is by [PhysK][physk].
 
 For a full list of all authors and contributors,
 check [the contributor's page][contributors].

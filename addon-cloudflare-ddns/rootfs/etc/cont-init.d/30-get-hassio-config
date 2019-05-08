@@ -53,4 +53,4 @@ else
   exit 1
 fi
 
-echo "EMAIL=\"$EMAIL\" API_KEY=\"$API_KEY\" ZONE=\"$DOMAIN\" SUBDOMAIN=\"$SUBDOMAIN\"" > /config/cloudflare.conf
+echo "EMAIL=\"$EMAIL\" API_KEY=\"$API_KEY\" ZONE=\"$DOMAIN\" SUBDOMAIN=\"$SUBDOMAIN\"" > /data/cloudflare.conf
