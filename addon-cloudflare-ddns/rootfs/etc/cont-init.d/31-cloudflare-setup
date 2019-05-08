@@ -1,5 +1,6 @@
 #!/usr/bin/with-contenv bashio
-
+# shellcheck disable=SC1091
+# shellcheck disable=SC2086
 . /app/cloudflare.sh
 . /data/cloudflare.conf
 
