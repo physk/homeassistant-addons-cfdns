@@ -11,8 +11,8 @@ RUN echo http://dl-2.alpinelinux.org/alpine/edge/community/ >> /etc/apk/reposito
     apk add --no-cache \
     wget@edge=1.20.3-r0 \
     jq@edge=1.6-r0 \
-    bind-tools@edge=9.14.1-r1 \
-    curl=7.64.0-r1  && \
+    bind-tools@edge=9.14.7-r5 \
+    curl@edge=7.67.0-r0  && \
     \
     chmod +x /etc/cont-init.d/* && \
     \
