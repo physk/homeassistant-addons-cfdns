@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "slug": "cf-ddns",
     "description": "Cloudflare DDNS by Community Hass.io Add-ons",
-    "url": "https://github.com/physk/hassio-addons-cf-ddns",
+    "url": "https://github.com/physk/homeassistant-addons-cfdns",
     "startup": "application",
     "arch": [
         "amd64",
