@@ -9,7 +9,7 @@ RUN chmod +x /etc/cont-init.d/* && \
     \
     mkdir -p /config && \
     \
-    apk add bind-tools=9.14.8-r0
+    apk --no-cache add bind-tools=9.14.8-r0
 
 # Script to run after startup
 CMD ["/app/run-cfdns.sh"]
