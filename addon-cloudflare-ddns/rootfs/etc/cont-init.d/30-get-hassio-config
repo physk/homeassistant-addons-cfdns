@@ -13,6 +13,7 @@ else
   bashio::exit.nok
   exit 1
 fi
+
 if bashio::config.has_value 'api_key'; then
   API_KEY=$(bashio::config 'api_key')
 else
@@ -26,6 +27,7 @@ else
   bashio::exit.nok
   exit 1
 fi
+
 if bashio::config.has_value 'domain'; then
   DOMAIN=$(bashio::config 'domain')
 else
@@ -39,6 +41,7 @@ else
   bashio::exit.nok
   exit 1
 fi
+
 if bashio::config.has_value 'subdomain'; then
   SUBDOMAIN=$(bashio::config 'subdomain')
 else
@@ -53,4 +56,4 @@ else
   exit 1
 fi
 
-echo "EMAIL=\"$EMAIL\" API_KEY=\"$API_KEY\" ZONE=\"$DOMAIN\" SUBDOMAIN=\"$SUBDOMAIN\"" > /data/cloudflare.conf
+echo "EMAIL=\"$EMAIL\" API_KEY=\"$API_KEY\" ZONE=\"$DOMAIN\" SUBDOMAIN=\"$SUBDOMAIN\"" > /tmp/cloudflare.conf

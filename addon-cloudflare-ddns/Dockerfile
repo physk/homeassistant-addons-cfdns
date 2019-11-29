@@ -1,22 +1,15 @@
-ARG BUILD_FROM=hassioaddons/base:3.1.0
+ARG BUILD_FROM=hassioaddons/base:5.0.2
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
 # Copy root filesystem
 COPY rootfs /
 
-# Setup base
-RUN echo http://dl-2.alpinelinux.org/alpine/edge/community/ >> /etc/apk/repositories && \
-    apk update && \
-    apk add --no-cache \
-    wget@edge=1.20.3-r0 \
-    jq@edge=1.6-r0 \
-    bind-tools@edge=9.14.1-r1 \
-    curl=7.64.0-r1  && \
+RUN chmod +x /etc/cont-init.d/* && \
     \
-    chmod +x /etc/cont-init.d/* && \
+    mkdir -p /config && \
     \
-    mkdir -p /config
+    apk add bind-tools=9.14.8-r0
 
 # Script to run after startup
 CMD ["/app/run-cfdns.sh"]

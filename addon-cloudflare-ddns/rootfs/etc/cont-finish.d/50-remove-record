@@ -1,9 +1,9 @@
 #!/usr/bin/with-contenv sh
 
-[ -f /config/cloudflare.conf ] || exit 0
+[ -f /tmp/cloudflare.conf ] || exit 0
 
 . /app/cloudflare.sh
-. /config/cloudflare.conf
+. /tmp/cloudflare.conf
 
 if [ "$DELETE_ON_STOP" == "true" ]; then
   echo "Deleting CloudFlare DNS record $CF_RECORD_NAME..."

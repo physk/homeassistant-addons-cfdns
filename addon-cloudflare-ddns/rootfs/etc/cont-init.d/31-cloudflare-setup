@@ -79,4 +79,4 @@ if [ "$CFDnsRecordId" == "null" ]; then
 fi
 
 echo "DNS Record: $CFDnsRecordName ($CFDnsRecordId)"
-echo "CF_ZONE_ID=\"$CFZoneId\" CF_RECORD_ID=\"$CFDnsRecordId\" CF_RECORD_NAME=\"$CFDnsRecordName\"" >> /data/cloudflare.conf
+echo "CF_ZONE_ID=\"$CFZoneId\" CF_RECORD_ID=\"$CFDnsRecordId\" CF_RECORD_NAME=\"$CFDnsRecordName\"" >> /tmp/cloudflare.conf

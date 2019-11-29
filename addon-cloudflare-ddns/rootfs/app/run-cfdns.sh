@@ -1,7 +1,7 @@
-#!/usr/bin/with-contenv bash
+#!/usr/bin/with-contenv bashio
 # shellcheck disable=SC1091
 . /app/cloudflare.sh
-. /data/cloudflare.conf
+. /tmp/cloudflare.conf
 
 sleep 10s
 while true;
